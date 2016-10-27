@@ -1,5 +1,10 @@
 # frozen_string_literal: true
+require_relative './commands_executor'
+
 class BitmapEditor
+  def initialize
+    @commands_executor = CommandsExecutor.new
+  end
 
   def run
     @running = true
@@ -19,7 +24,7 @@ class BitmapEditor
     when 'X'
       exit_console
     else
-      puts 'unrecognised command :('
+      commands_executor.call(input)
     end
   end
 
@@ -38,4 +43,6 @@ H X1 X2 Y C - Draw a horizontal segment of colour C in row Y between columns X1 
 S - Show the contents of the current image
 X - Terminate the session"
   end
+
+  attr_reader :commands_executor
 end
