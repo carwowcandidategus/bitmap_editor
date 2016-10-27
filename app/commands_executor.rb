@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require_relative './bitmap_creator'
+
 class CommandsExecutor
   UNRECOGNISED_COMMAND = -> (_) { puts 'unrecognised command :(' }
 
@@ -17,12 +19,13 @@ class CommandsExecutor
     command, arguments = input.split(' ', 2)
     executor_for(command).call(arguments)
   rescue
-    puts 'An error occured, please try again'
+    puts 'An error occured, please try again. Try `?` for help.'
   end
 
   private
 
   def create_bitmap(args)
+    @bitmap = BitmapCreator.call(args)
   end
 
   def clear_bitmap
@@ -44,6 +47,5 @@ class CommandsExecutor
     mappings[command] || UNRECOGNISED_COMMAND
   end
 
-  attr_accessor :bitmap
   attr_reader :mappings
 end

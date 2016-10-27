@@ -23,8 +23,17 @@ describe CommandsExecutor do
     it 'exits gracefully if a StandardError is raised' do
       allow(subject).to receive(:clear_bitmap).and_raise(StandardError.new)
       expect { subject.call('C') }
-        .to output("An error occured, please try again\n").to_stdout
+        .to output("An error occured, please try again. Try `?` for help.\n").to_stdout
     end
   end
+
+  describe '#create_bitmap' do
+    let(:input) { '2 3' }
+
+    it 'calls BitmapCreator' do
+      allow(BitmapCreator).to receive(:call)
+      subject.send(:create_bitmap, input)
+      expect(BitmapCreator).to have_received(:call).with(input)
+    end
   end
 end
