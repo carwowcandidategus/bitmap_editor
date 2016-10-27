@@ -30,6 +30,13 @@ class CommandsExecutor
   end
 
   def clear_bitmap
+    with_valid_bitmap do
+      bitmap.each_index do |row|
+        bitmap[0].each_index do |column|
+          bitmap[row][column] = 0
+        end
+      end
+    end
   end
 
   def color_pixel(args)
@@ -42,13 +49,19 @@ class CommandsExecutor
   end
 
   def show_bitmap
-    if bitmap
+    with_valid_bitmap do
       bitmap.each do |row|
         row.each do |element|
           print element
         end
         print "\n"
       end
+    end
+  end
+
+  def with_valid_bitmap
+    if bitmap
+      yield
     else
       puts BITMAP_NOT_YET_CREATED
     end
