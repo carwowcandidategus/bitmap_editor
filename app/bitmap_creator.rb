@@ -9,17 +9,21 @@ class BitmapCreator < Service
   end
 
   def call
-    unless valid?
-      puts '`I M N` – M / N both need to be between 1 and 250'
-      return
-    end
-    Array.new(height) { Array.new(width) { 0 } }
+    with_valid_coordinates { Array.new(height) { Array.new(width) { 0 } } }
   end
 
   private
 
   def valid?
     COORDINATES_RANGE.include?(width) && COORDINATES_RANGE.include?(height)
+  end
+
+  def with_valid_coordinates
+    if valid?
+      yield
+    else
+      puts '`I M N` – M / N both need to be between 1 and 250'
+    end
   end
 
   attr_reader :width, :height

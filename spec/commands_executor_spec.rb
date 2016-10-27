@@ -36,4 +36,27 @@ describe CommandsExecutor do
       expect(BitmapCreator).to have_received(:call).with(input)
     end
   end
+
+  describe '#color_pixel' do
+    let(:input) { '2 3 C' }
+
+    context 'with previously created bitmap' do
+      let!(:bitmap) { subject.call('I 5 5') }
+
+      it 'calls PixelColor' do
+        allow(PixelColorService).to receive(:call)
+        subject.send(:color_pixel, input)
+        expect(PixelColorService).to have_received(:call).with(bitmap, input)
+      end
+    end
+
+    context 'without a previously created bitmap' do
+      it 'does not call PixelColor' do
+        allow(PixelColorService).to receive(:call)
+        expect { subject.send(:color_pixel, input) }
+          .to output("No image created yet. Try `?` for help.\n").to_stdout
+        expect(PixelColorService).to_not have_received(:call)
+      end
+    end
+  end
 end
