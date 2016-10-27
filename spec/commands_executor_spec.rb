@@ -19,5 +19,12 @@ describe CommandsExecutor do
         expect(subject).to have_received(expected_method_call)
       end
     end
+
+    it 'exits gracefully if a StandardError is raised' do
+      allow(subject).to receive(:clear_bitmap).and_raise(StandardError.new)
+      expect { subject.call('C') }
+        .to output("An error occured, please try again\n").to_stdout
+    end
+  end
   end
 end

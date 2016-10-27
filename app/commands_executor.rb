@@ -16,6 +16,8 @@ class CommandsExecutor
   def call(input)
     command, arguments = input.split(' ', 2)
     executor_for(command).call(arguments)
+  rescue
+    puts 'An error occured, please try again'
   end
 
   private
