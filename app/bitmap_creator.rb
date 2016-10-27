@@ -10,7 +10,7 @@ class BitmapCreator < Service
 
   def call
     unless valid?
-      puts 'M / N both need to be between 1 and 250'
+      puts '`I M N` – M / N both need to be between 1 and 250'
       return
     end
     Array.new(height) { Array.new(width) { 0 } }

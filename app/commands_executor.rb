@@ -3,6 +3,7 @@ require_relative './bitmap_creator'
 
 class CommandsExecutor
   UNRECOGNISED_COMMAND = -> (_) { puts 'unrecognised command :(' }
+  BITMAP_NOT_YET_CREATED = 'No image created yet. Try `?` for help.'
 
   def initialize
     @mappings = {
@@ -41,11 +42,21 @@ class CommandsExecutor
   end
 
   def show_bitmap
+    if bitmap
+      bitmap.each do |row|
+        row.each do |element|
+          print element
+        end
+        print "\n"
+      end
+    else
+      puts BITMAP_NOT_YET_CREATED
+    end
   end
 
   def executor_for(command)
     mappings[command] || UNRECOGNISED_COMMAND
   end
 
-  attr_reader :mappings
+  attr_reader :mappings, :bitmap
 end

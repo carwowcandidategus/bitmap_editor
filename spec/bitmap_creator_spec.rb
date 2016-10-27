@@ -31,7 +31,8 @@ describe BitmapCreator do
         let('args') { '0 0' }
 
         it 'prints a helper message' do
-          expect { subject.call }.to output("M / N both need to be between 1 and 250\n").to_stdout
+          expect { subject.call }
+            .to output("`I M N` – M / N both need to be between 1 and 250\n").to_stdout
         end
       end
 
@@ -39,7 +40,8 @@ describe BitmapCreator do
         let('args') { '251 251' }
 
         it 'prints a helper message' do
-          expect { subject.call }.to output("M / N both need to be between 1 and 250\n").to_stdout
+          expect { subject.call }
+            .to output("`I M N` – M / N both need to be between 1 and 250\n").to_stdout
         end
       end
 
@@ -47,7 +49,8 @@ describe BitmapCreator do
         let('args') { '0 1' }
 
         it 'prints a helper message' do
-          expect { subject.call }.to output("M / N both need to be between 1 and 250\n").to_stdout
+          expect { subject.call }
+            .to output("`I M N` – M / N both need to be between 1 and 250\n").to_stdout
         end
       end
 
@@ -55,7 +58,8 @@ describe BitmapCreator do
         let('args') { '1 0' }
 
         it 'prints a helper message' do
-          expect { subject.call }.to output("M / N both need to be between 1 and 250\n").to_stdout
+          expect { subject.call }
+            .to output("`I M N` – M / N both need to be between 1 and 250\n").to_stdout
         end
       end
 
@@ -63,7 +67,8 @@ describe BitmapCreator do
         let('args') { '251 1' }
 
         it 'prints a helper message' do
-          expect { subject.call }.to output("M / N both need to be between 1 and 250\n").to_stdout
+          expect { subject.call }
+            .to output("`I M N` – M / N both need to be between 1 and 250\n").to_stdout
         end
       end
 
@@ -71,7 +76,8 @@ describe BitmapCreator do
         let('args') { '1 251' }
 
         it 'prints a helper message' do
-          expect { subject.call }.to output("M / N both need to be between 1 and 250\n").to_stdout
+          expect { subject.call }
+            .to output("`I M N` – M / N both need to be between 1 and 250\n").to_stdout
         end
       end
     end
