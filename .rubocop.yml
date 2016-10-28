@@ -12,3 +12,6 @@ Metrics/BlockLength:
 
 Style/BlockComments:
   Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false

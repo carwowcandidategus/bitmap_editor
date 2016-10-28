@@ -2,6 +2,7 @@
 require_relative './bitmap_creator'
 require_relative './pixel_color_service'
 require_relative './vertical_line_drawer'
+require_relative './horizontal_line_drawer'
 
 class CommandsExecutor
   UNRECOGNISED_COMMAND = -> (_) { puts 'unrecognised command :(' }
@@ -50,6 +51,7 @@ class CommandsExecutor
   end
 
   def draw_horizontal_line(args)
+    with_valid_bitmap { HorizontalLineDrawer.call(bitmap, args) }
   end
 
   def show_bitmap

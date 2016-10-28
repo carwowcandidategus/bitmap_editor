@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require_relative '../app/pixel_color_service'
+require_relative '../app/commands_executor'
 
 describe PixelColorService do
   let!(:bitmap) { CommandsExecutor.new.call('I 5 5') }

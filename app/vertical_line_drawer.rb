@@ -6,13 +6,14 @@ class VerticalLineDrawer < Service
     @bitmap = bitmap
 
     a = args.split(' ')
-    @column, @y1, @y2 = a[0..2].map(&:to_i).map { |i| i - 1 }
+    @column, @y1, @y2 = a[0..2].map(&:to_i)
     @color = a[-1].to_s
   end
 
   def call
+    @y1, @y2 = y2, y1 if y1 > y2
     (y1..y2).to_a.each do |y|
-      bitmap[y][column] = color
+      PixelColorService.call(bitmap, "#{column} #{y} #{color}")
     end
   end
 

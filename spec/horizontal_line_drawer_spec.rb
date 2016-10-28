@@ -1,21 +1,21 @@
 # frozen_string_literal: true
-require_relative '../app/vertical_line_drawer'
+require_relative '../app/horizontal_line_drawer'
 require_relative '../app/commands_executor'
 
-describe VerticalLineDrawer do
+describe HorizontalLineDrawer do
   let!(:bitmap) { CommandsExecutor.new.call('I 5 6') }
-  let(:column) { 2 }
-  let(:y1) { 3 }
-  let(:y2) { 6 }
-  let(:c) { 'W' }
-  let(:args) { "#{column} #{y1} #{y2} #{c}" }
+  let(:row) { 3 }
+  let(:x1) { 5 }
+  let(:x2) { 2 }
+  let(:c) { 'Z' }
+  let(:args) { "#{x1} #{x2} #{row} #{c}" }
 
   describe '#call' do
     subject { described_class.new(bitmap, args) }
 
     it 'colors the required pixels' do
       subject.call
-      (y1..y2).to_a.each { |y| expect(bitmap[y - 1][column - 1]).to eq(c) }
+      (x1..x2).to_a.each { |x| expect(bitmap[row - 1][x - 1]).to eq(c) }
     end
   end
 end

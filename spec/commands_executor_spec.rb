@@ -82,4 +82,27 @@ describe CommandsExecutor do
       end
     end
   end
+
+  describe '#draw_horizontal_line' do
+    let(:input) { '2 3 6 W' }
+
+    context 'with previously created bitmap' do
+      let!(:bitmap) { subject.call('I 5 6') }
+
+      it 'calls VerticalLineDrawer' do
+        allow(HorizontalLineDrawer).to receive(:call)
+        subject.send(:draw_horizontal_line, input)
+        expect(HorizontalLineDrawer).to have_received(:call).with(bitmap, input)
+      end
+    end
+
+    context 'without a previously created bitmap' do
+      it 'does not call PixelColor' do
+        allow(HorizontalLineDrawer).to receive(:call)
+        expect { subject.send(:draw_horizontal_line, input) }
+          .to output("No image created yet. Try `?` for help.\n").to_stdout
+        expect(HorizontalLineDrawer).to_not have_received(:call)
+      end
+    end
+  end
 end
